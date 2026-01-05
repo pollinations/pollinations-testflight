@@ -36,7 +36,7 @@ curl 'https://gen.pollinations.ai/v1/chat/completions' \
   -d '{"model": "openai", "messages": [{"role": "user", "content": [{"type": "text", "text": "Describe this image"}, {"type": "image_url", "image_url": {"url": "https://example.com/image.jpg"}}]}]}'
 ```
 
-**Gemini Tools:** `gemini`, `gemini-fast`, `gemini-large` have `code_execution` enabled by default. `gemini-search` has `google_search` enabled. Pass your own `tools` array to override (e.g., `[{"type": "function", "function": {"name": "google_search"}}]`).
+**Gemini Tools:** `gemini`, `gemini-large` have `code_execution` enabled (can generate images/plots). `gemini-search` has `google_search` enabled. Responses may include `content_blocks` with `image_url`, `text`, or `thinking` types.
 
 ### Simple Text Endpoint
 
@@ -146,14 +146,6 @@ Get available text models (OpenAI-compatible). If an API key with model restrict
 
     `object`
 
-    - **`name` (required)**
-
-      `string`
-
-    - **`stack`**
-
-      `string`
-
   - **`message` (required)**
 
     `object`
@@ -188,10 +180,6 @@ Get available text models (OpenAI-compatible). If an API key with model restrict
     "code": "INTERNAL_ERROR",
     "message": "Oh snap, something went wrong on our end. We're on it!",
     "timestamp": "",
-    "details": {
-      "name": "",
-      "stack": ""
-    },
     "requestId": "",
     "cause": null
   }
@@ -321,14 +309,6 @@ Get a list of available image generation models with pricing, capabilities, and 
 
     `object`
 
-    - **`name` (required)**
-
-      `string`
-
-    - **`stack`**
-
-      `string`
-
   - **`message` (required)**
 
     `object`
@@ -363,10 +343,6 @@ Get a list of available image generation models with pricing, capabilities, and 
     "code": "INTERNAL_ERROR",
     "message": "Oh snap, something went wrong on our end. We're on it!",
     "timestamp": "",
-    "details": {
-      "name": "",
-      "stack": ""
-    },
     "requestId": "",
     "cause": null
   }
@@ -496,14 +472,6 @@ Get a list of available text generation models with pricing, capabilities, and m
 
     `object`
 
-    - **`name` (required)**
-
-      `string`
-
-    - **`stack`**
-
-      `string`
-
   - **`message` (required)**
 
     `object`
@@ -538,10 +506,6 @@ Get a list of available text generation models with pricing, capabilities, and m
     "code": "INTERNAL_ERROR",
     "message": "Oh snap, something went wrong on our end. We're on it!",
     "timestamp": "",
-    "details": {
-      "name": "",
-      "stack": ""
-    },
     "requestId": "",
     "cause": null
   }
@@ -1029,26 +993,6 @@ API keys can be created from your dashboard at enter.pollinations.ai. Secret key
 
   `object`
 
-  - **`completion_tokens` (required)**
-
-    `integer`
-
-  - **`prompt_tokens` (required)**
-
-    `integer`
-
-  - **`total_tokens` (required)**
-
-    `integer`
-
-  - **`completion_tokens_details`**
-
-    `object`
-
-  - **`prompt_tokens_details`**
-
-    `object`
-
 - **`citations`**
 
   `array`
@@ -1130,92 +1074,18 @@ API keys can be created from your dashboard at enter.pollinations.ai. Secret key
           }
         ]
       },
-      "content_filter_results": {
-        "hate": {
-          "filtered": true,
-          "severity": "safe"
-        },
-        "self_harm": {
-          "filtered": true,
-          "severity": "safe"
-        },
-        "sexual": {
-          "filtered": true,
-          "severity": "safe"
-        },
-        "violence": {
-          "filtered": true,
-          "severity": "safe"
-        },
-        "jailbreak": {
-          "filtered": true,
-          "detected": true
-        },
-        "protected_material_text": {
-          "filtered": true,
-          "detected": true
-        },
-        "protected_material_code": {
-          "filtered": true,
-          "detected": true
-        }
-      }
+      "content_filter_results": null
     }
   ],
   "prompt_filter_results": [
     {
-      "prompt_index": 0,
-      "content_filter_results": {
-        "hate": {
-          "filtered": true,
-          "severity": "safe"
-        },
-        "self_harm": {
-          "filtered": true,
-          "severity": "safe"
-        },
-        "sexual": {
-          "filtered": true,
-          "severity": "safe"
-        },
-        "violence": {
-          "filtered": true,
-          "severity": "safe"
-        },
-        "jailbreak": {
-          "filtered": true,
-          "detected": true
-        },
-        "protected_material_text": {
-          "filtered": true,
-          "detected": true
-        },
-        "protected_material_code": {
-          "filtered": true,
-          "detected": true
-        }
-      }
+      "prompt_index": 0
     }
   ],
   "created": -9007199254740991,
   "model": "",
   "system_fingerprint": "",
   "object": "chat.completion",
-  "usage": {
-    "completion_tokens": 0,
-    "completion_tokens_details": {
-      "accepted_prediction_tokens": 0,
-      "audio_tokens": 0,
-      "reasoning_tokens": 0,
-      "rejected_prediction_tokens": 0
-    },
-    "prompt_tokens": 0,
-    "prompt_tokens_details": {
-      "audio_tokens": 0,
-      "cached_tokens": 0
-    },
-    "total_tokens": 0
-  },
   "user_tier": "anonymous",
   "citations": [
     ""
@@ -1238,26 +1108,6 @@ API keys can be created from your dashboard at enter.pollinations.ai. Secret key
   - **`details` (required)**
 
     `object`
-
-    - **`fieldErrors` (required)**
-
-      `object`
-
-    - **`formErrors` (required)**
-
-      `array`
-
-      **Items:**
-
-      `string`
-
-    - **`name` (required)**
-
-      `string`
-
-    - **`stack`**
-
-      `string`
 
   - **`message` (required)**
 
@@ -1293,18 +1143,6 @@ API keys can be created from your dashboard at enter.pollinations.ai. Secret key
     "code": "BAD_REQUEST",
     "message": "Something was wrong with the input data, check the details for more info.",
     "timestamp": "",
-    "details": {
-      "name": "",
-      "stack": "",
-      "formErrors": [
-        ""
-      ],
-      "fieldErrors": {
-        "propertyName*": [
-          ""
-        ]
-      }
-    },
     "requestId": "",
     "cause": null
   }
@@ -1326,14 +1164,6 @@ API keys can be created from your dashboard at enter.pollinations.ai. Secret key
   - **`details` (required)**
 
     `object`
-
-    - **`name` (required)**
-
-      `string`
-
-    - **`stack`**
-
-      `string`
 
   - **`message` (required)**
 
@@ -1369,10 +1199,6 @@ API keys can be created from your dashboard at enter.pollinations.ai. Secret key
     "code": "UNAUTHORIZED",
     "message": "You need to authenticate by providing a session cookie or Authorization header (Bearer token).",
     "timestamp": "",
-    "details": {
-      "name": "",
-      "stack": ""
-    },
     "requestId": "",
     "cause": null
   }
@@ -1394,14 +1220,6 @@ API keys can be created from your dashboard at enter.pollinations.ai. Secret key
   - **`details` (required)**
 
     `object`
-
-    - **`name` (required)**
-
-      `string`
-
-    - **`stack`**
-
-      `string`
 
   - **`message` (required)**
 
@@ -1437,10 +1255,6 @@ API keys can be created from your dashboard at enter.pollinations.ai. Secret key
     "code": "INTERNAL_ERROR",
     "message": "Oh snap, something went wrong on our end. We're on it!",
     "timestamp": "",
-    "details": {
-      "name": "",
-      "stack": ""
-    },
     "requestId": "",
     "cause": null
   }
@@ -1494,26 +1308,6 @@ true
 
     `object`
 
-    - **`fieldErrors` (required)**
-
-      `object`
-
-    - **`formErrors` (required)**
-
-      `array`
-
-      **Items:**
-
-      `string`
-
-    - **`name` (required)**
-
-      `string`
-
-    - **`stack`**
-
-      `string`
-
   - **`message` (required)**
 
     `object`
@@ -1548,18 +1342,6 @@ true
     "code": "BAD_REQUEST",
     "message": "Something was wrong with the input data, check the details for more info.",
     "timestamp": "",
-    "details": {
-      "name": "",
-      "stack": "",
-      "formErrors": [
-        ""
-      ],
-      "fieldErrors": {
-        "propertyName*": [
-          ""
-        ]
-      }
-    },
     "requestId": "",
     "cause": null
   }
@@ -1581,14 +1363,6 @@ true
   - **`details` (required)**
 
     `object`
-
-    - **`name` (required)**
-
-      `string`
-
-    - **`stack`**
-
-      `string`
 
   - **`message` (required)**
 
@@ -1624,10 +1398,6 @@ true
     "code": "UNAUTHORIZED",
     "message": "You need to authenticate by providing a session cookie or Authorization header (Bearer token).",
     "timestamp": "",
-    "details": {
-      "name": "",
-      "stack": ""
-    },
     "requestId": "",
     "cause": null
   }
@@ -1649,14 +1419,6 @@ true
   - **`details` (required)**
 
     `object`
-
-    - **`name` (required)**
-
-      `string`
-
-    - **`stack`**
-
-      `string`
 
   - **`message` (required)**
 
@@ -1692,10 +1454,6 @@ true
     "code": "INTERNAL_ERROR",
     "message": "Oh snap, something went wrong on our end. We're on it!",
     "timestamp": "",
-    "details": {
-      "name": "",
-      "stack": ""
-    },
     "requestId": "",
     "cause": null
   }
@@ -1776,26 +1534,6 @@ API keys can be created from your dashboard at enter.pollinations.ai.
 
     `object`
 
-    - **`fieldErrors` (required)**
-
-      `object`
-
-    - **`formErrors` (required)**
-
-      `array`
-
-      **Items:**
-
-      `string`
-
-    - **`name` (required)**
-
-      `string`
-
-    - **`stack`**
-
-      `string`
-
   - **`message` (required)**
 
     `object`
@@ -1830,18 +1568,6 @@ API keys can be created from your dashboard at enter.pollinations.ai.
     "code": "BAD_REQUEST",
     "message": "Something was wrong with the input data, check the details for more info.",
     "timestamp": "",
-    "details": {
-      "name": "",
-      "stack": "",
-      "formErrors": [
-        ""
-      ],
-      "fieldErrors": {
-        "propertyName*": [
-          ""
-        ]
-      }
-    },
     "requestId": "",
     "cause": null
   }
@@ -1863,14 +1589,6 @@ API keys can be created from your dashboard at enter.pollinations.ai.
   - **`details` (required)**
 
     `object`
-
-    - **`name` (required)**
-
-      `string`
-
-    - **`stack`**
-
-      `string`
 
   - **`message` (required)**
 
@@ -1906,10 +1624,6 @@ API keys can be created from your dashboard at enter.pollinations.ai.
     "code": "UNAUTHORIZED",
     "message": "You need to authenticate by providing a session cookie or Authorization header (Bearer token).",
     "timestamp": "",
-    "details": {
-      "name": "",
-      "stack": ""
-    },
     "requestId": "",
     "cause": null
   }
@@ -1931,14 +1645,6 @@ API keys can be created from your dashboard at enter.pollinations.ai.
   - **`details` (required)**
 
     `object`
-
-    - **`name` (required)**
-
-      `string`
-
-    - **`stack`**
-
-      `string`
 
   - **`message` (required)**
 
@@ -1974,10 +1680,6 @@ API keys can be created from your dashboard at enter.pollinations.ai.
     "code": "INTERNAL_ERROR",
     "message": "Oh snap, something went wrong on our end. We're on it!",
     "timestamp": "",
-    "details": {
-      "name": "",
-      "stack": ""
-    },
     "requestId": "",
     "cause": null
   }
@@ -1985,27 +1687,6 @@ API keys can be created from your dashboard at enter.pollinations.ai.
 ```
 
 ## Schemas
-
-### ErrorDetails
-
-- **Type:**`object`
-
-* **`name` (required)**
-
-  `string`
-
-* **`stack`**
-
-  `string`
-
-**Example:**
-
-```json
-{
-  "name": "",
-  "stack": ""
-}
-```
 
 ### CacheControl
 
@@ -2020,220 +1701,6 @@ API keys can be created from your dashboard at enter.pollinations.ai.
 ```json
 {
   "type": "ephemeral"
-}
-```
-
-### ContentFilterSeverity
-
-- **Type:**`string`
-
-**Example:**
-
-### ContentFilterResult
-
-- **Type:**`object`
-
-* **`hate`**
-
-  `object`
-
-  - **`filtered` (required)**
-
-    `boolean`
-
-  - **`severity` (required)**
-
-    `string`, possible values: `"safe", "low", "medium", "high"`
-
-* **`jailbreak`**
-
-  `object`
-
-  - **`detected` (required)**
-
-    `boolean`
-
-  - **`filtered` (required)**
-
-    `boolean`
-
-* **`protected_material_code`**
-
-  `object`
-
-  - **`detected` (required)**
-
-    `boolean`
-
-  - **`filtered` (required)**
-
-    `boolean`
-
-* **`protected_material_text`**
-
-  `object`
-
-  - **`detected` (required)**
-
-    `boolean`
-
-  - **`filtered` (required)**
-
-    `boolean`
-
-* **`self_harm`**
-
-  `object`
-
-  - **`filtered` (required)**
-
-    `boolean`
-
-  - **`severity` (required)**
-
-    `string`, possible values: `"safe", "low", "medium", "high"`
-
-* **`sexual`**
-
-  `object`
-
-  - **`filtered` (required)**
-
-    `boolean`
-
-  - **`severity` (required)**
-
-    `string`, possible values: `"safe", "low", "medium", "high"`
-
-* **`violence`**
-
-  `object`
-
-  - **`filtered` (required)**
-
-    `boolean`
-
-  - **`severity` (required)**
-
-    `string`, possible values: `"safe", "low", "medium", "high"`
-
-**Example:**
-
-```json
-{
-  "hate": {
-    "filtered": true,
-    "severity": "safe"
-  },
-  "self_harm": {
-    "filtered": true,
-    "severity": "safe"
-  },
-  "sexual": {
-    "filtered": true,
-    "severity": "safe"
-  },
-  "violence": {
-    "filtered": true,
-    "severity": "safe"
-  },
-  "jailbreak": {
-    "filtered": true,
-    "detected": true
-  },
-  "protected_material_text": {
-    "filtered": true,
-    "detected": true
-  },
-  "protected_material_code": {
-    "filtered": true,
-    "detected": true
-  }
-}
-```
-
-### CompletionUsage
-
-- **Type:**`object`
-
-* **`completion_tokens` (required)**
-
-  `integer`
-
-* **`prompt_tokens` (required)**
-
-  `integer`
-
-* **`total_tokens` (required)**
-
-  `integer`
-
-* **`completion_tokens_details`**
-
-  `object`
-
-* **`prompt_tokens_details`**
-
-  `object`
-
-**Example:**
-
-```json
-{
-  "completion_tokens": 0,
-  "completion_tokens_details": {
-    "accepted_prediction_tokens": 0,
-    "audio_tokens": 0,
-    "reasoning_tokens": 0,
-    "rejected_prediction_tokens": 0
-  },
-  "prompt_tokens": 0,
-  "prompt_tokens_details": {
-    "audio_tokens": 0,
-    "cached_tokens": 0
-  },
-  "total_tokens": 0
-}
-```
-
-### ValidationErrorDetails
-
-- **Type:**`object`
-
-* **`fieldErrors` (required)**
-
-  `object`
-
-* **`formErrors` (required)**
-
-  `array`
-
-  **Items:**
-
-  `string`
-
-* **`name` (required)**
-
-  `string`
-
-* **`stack`**
-
-  `string`
-
-**Example:**
-
-```json
-{
-  "name": "",
-  "stack": "",
-  "formErrors": [
-    ""
-  ],
-  "fieldErrors": {
-    "propertyName*": [
-      ""
-    ]
-  }
 }
 ```
 
