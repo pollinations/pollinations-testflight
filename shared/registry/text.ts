@@ -86,7 +86,7 @@ export const TEXT_SERVICES = {
         provider: "ovhcloud",
         cost: [
             {
-                date: COST_START_DATE,
+                date: new Date("2026-01-05").getTime(),
                 promptTextTokens: perMillion(0.06),
                 completionTextTokens: perMillion(0.22),
             },
@@ -296,8 +296,8 @@ export const TEXT_SERVICES = {
     },
     "claude": {
         aliases: ["claude-sonnet-4.5", "claude-sonnet"],
-        modelId: "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
-        provider: "aws",
+        modelId: "claude-sonnet-4-5-20250929",
+        provider: "google",
         cost: [
             {
                 date: COST_START_DATE,
@@ -313,8 +313,8 @@ export const TEXT_SERVICES = {
     },
     "claude-large": {
         aliases: ["claude-opus-4.5", "claude-opus"],
-        modelId: "global.anthropic.claude-opus-4-5-20251101-v1:0",
-        provider: "aws",
+        modelId: "claude-opus-4-5-20251101",
+        provider: "google",
         cost: [
             {
                 date: COST_START_DATE,
@@ -422,6 +422,46 @@ export const TEXT_SERVICES = {
         inputModalities: ["text"],
         outputModalities: ["text"],
         tools: true,
+        isSpecialized: false,
+    },
+    "glm": {
+        aliases: ["glm-4.7", "glm-4p7"],
+        modelId: "accounts/fireworks/models/glm-4p7",
+        provider: "fireworks",
+        cost: [
+            {
+                date: new Date("2026-01-05").getTime(),
+                promptTextTokens: perMillion(0.6),
+                promptCachedTokens: perMillion(0.3),
+                completionTextTokens: perMillion(2.2),
+            },
+        ],
+        description: "Z.ai GLM-4.7 - Coding, Reasoning & Agentic Workflows",
+        inputModalities: ["text"],
+        outputModalities: ["text"],
+        tools: true,
+        reasoning: true,
+        contextWindow: 198000,
+        isSpecialized: false,
+    },
+    "minimax": {
+        aliases: ["minimax-m2.1", "minimax-m2p1"],
+        modelId: "accounts/fireworks/models/minimax-m2p1",
+        provider: "fireworks",
+        cost: [
+            {
+                date: new Date("2026-01-05").getTime(),
+                promptTextTokens: perMillion(0.3),
+                promptCachedTokens: perMillion(0.15),
+                completionTextTokens: perMillion(1.2),
+            },
+        ],
+        description: "MiniMax M2.1 - Multi-Language & Agent Workflows",
+        inputModalities: ["text"],
+        outputModalities: ["text"],
+        tools: true,
+        reasoning: true,
+        contextWindow: 200000,
         isSpecialized: false,
     },
 } as const satisfies Record<string, ServiceDefinition<string>>;
